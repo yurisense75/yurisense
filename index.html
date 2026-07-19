@@ -121,18 +121,18 @@
 					setTimeout(() => {
 						const utter = new SpeechSynthesisUtterance(char);
 						utter.lang = 'ko-KR';
-						utter.rate = 0.7; // ゆっくり
+						utter.rate = 0.5; // ゆっくり
 						utter.pitch = 1.0;
 						const v = getKoreanVoice();
 						if(v) utter.voice = v;
 						window.speechSynthesis.speak(utter);
-					}, index * 800); // 各文字の間に0.8秒の間隔
+					}, index * 1200); // 各文字の間に1.2秒の間隔
 				});
 			} else {
 				// 単一の文字の場合
 				const utter = new SpeechSynthesisUtterance(text);
 				utter.lang = 'ko-KR';
-				utter.rate = 0.7;
+				utter.rate = 0.5; // ゆっくり
 				const v = getKoreanVoice(); if(v) utter.voice = v;
 				window.speechSynthesis.speak(utter);
 			}
