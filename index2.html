@@ -90,6 +90,12 @@
         box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
       }
 
+      .emoji {
+        font-size: 24px;
+        margin: 0 4px;
+        flex: 0 0 auto;
+      }
+
       .play-btn {
         flex: 0 0 42px;
         width: 42px;
@@ -198,7 +204,12 @@
         img.src = imagePath;
         img.onerror = () => { img.src = placeholder; };
 
+        const emoji = document.createElement("div");
+        emoji.className = "emoji";
+        emoji.textContent = "�";
+
         row.appendChild(button);
+        row.appendChild(emoji);
         row.appendChild(textNode);
         row.appendChild(img);
         return row;
