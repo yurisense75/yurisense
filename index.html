@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>韓国語 はじめよう - 発音練習</title>
+	<style>
+		:root{ --bg: #FEF1E0; --text: #000000; --navy: #000080; --navy-contrast: #ffffff }
+		html,body{height:100%;}
+		body{margin:0;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text)}
+		.wrap{max-width:960px;margin:40px auto;padding:20px}
+		header{display:flex;gap:20px;align-items:center}
+		.logo{width:96px;height:96px;border-radius:8px;background:#ffd9b3;display:flex;align-items:center;justify-content:center;font-size:42px}
+		h1{margin:0;font-size:24px}
+		.section{margin-top:20px;padding:12px;border-radius:8px}
+		.group-row{display:flex;align-items:center;gap:16px;padding:8px 0}
+		.play-btn{background:var(--navy);color:var(--navy-contrast);border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+		.play-btn:active{transform:scale(.98)}
+		.group-text{font-size:22px}
+		.label{font-weight:700;margin-right:8px}
+		.note{color:#333;margin-top:8px}
+		img{display:none !important}
+		@media (max-width:600px){.group-text{font-size:18px}} 
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<header>
+			<div class="logo" aria-hidden="true">😊</div>
+			<div>
+				<h1>ハングル基礎 - グループ再生</h1>
+				<p class="note">各行の再生ボタンを押すと、その行の文字を1つの文として再生します。</p>
+			</div>
+		</header>
+
+		<div class="section" id="section-1">
+			<h2>1-1　母音①　基本の母音</h2>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="아 야 어 여">▶</button>
+				<div class="group-text">아　야　어　여</div>
+			</div>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="오 요 우 유">▶</button>
+				<div class="group-text">오　요　우　유</div>
+			</div>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="으 이">▶</button>
+				<div class="group-text">으　이</div>
+			</div>
+
+			<h2 style="margin-top:18px">1-2　母音②　複合母音</h2>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="애 에 얘 예">▶</button>
+				<div class="group-text">애　에　얘　예</div>
+			</div>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="와 워 위 의">▶</button>
+				<div class="group-text">와　워　위　의</div>
+			</div>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="외 왜 웨">▶</button>
+				<div class="group-text">외　왜　웨</div>
+			</div>
+		</div>
+
+		<div class="section" id="section-2">
+			<h2>2-1　子音①　基本の子音</h2>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="가 나 다 라 마 바 사 아 자 하">▶</button>
+				<div class="group-text">가　나　다　라　마　바　사　아　자　하</div>
+			</div>
+
+			<h2 style="margin-top:18px">2-2　子音②　激音</h2>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="차 카 타 파">▶</button>
+				<div class="group-text">차　카　타　파</div>
+			</div>
+
+			<h2 style="margin-top:18px">2-3　子音③　濃音</h2>
+			<div class="group-row">
+				<button class="play-btn" data-phrase="까 따 빠 싸 짜">▶</button>
+				<div class="group-text">까　따　빠　싸　짜</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function getKoreanVoice(){
+			const voices = speechSynthesis.getVoices();
+			for(const v of voices){
+				if(v.lang && v.lang.toLowerCase().startsWith('ko')) return v;
+				if(v.name && /korean/i.test(v.name)) return v;
+			}
+			return null;
+		}
+
+		function playText(text){
+			if(!('speechSynthesis' in window)){
+				console.warn('SpeechSynthesis 未対応のブラウザです');
+				return;
+			}
+			const utter = new SpeechSynthesisUtterance(text);
+			utter.lang = 'ko-KR';
+			const v = getKoreanVoice(); if(v) utter.voice = v;
+			window.speechSynthesis.cancel();
+			window.speechSynthesis.speak(utter);
+		}
+
+		document.querySelectorAll('.play-btn').forEach(btn=>{
+			btn.addEventListener('click', ()=>{
+				const phrase = btn.getAttribute('data-phrase') || '';
+				playText(phrase);
+			});
+		});
+
+		if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+			speechSynthesis.onvoiceschanged = function(){ /* no-op */ };
+		}
+	</script>
+	<footer style="text-align:center;margin-top:40px;padding:20px;color:#666;border-top:1px solid #ddd;font-size:14px;">
+		<p style="margin:0;">&copy; Copyright &copy; SSglobal Miura Yuri</p>
+	</footer>
+</body>
+</html>
+

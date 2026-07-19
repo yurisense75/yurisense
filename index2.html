@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>韓国語 はじめよう</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #ffd69e 0%, #ffc488 100%);
+        color: #000000;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .app {
+        width: min(100%, 430px);
+        padding: 16px 12px 28px;
+      }
+
+      .header {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 14px 14px 12px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        margin-bottom: 12px;
+      }
+
+      .header h1 {
+        font-size: 1.1rem;
+        margin: 0 0 6px;
+        color: #000000;
+      }
+
+      .header p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #000000;
+        line-height: 1.5;
+      }
+
+      .letter-groups {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .letter-section {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 12px 12px 10px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+      }
+
+      .letter-section h2 {
+        font-size: 0.95rem;
+        margin: 0 0 8px;
+        color: #1d4ed8;
+      }
+
+      .letter-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .word-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .word-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 10px 11px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+      }
+
+      .play-btn {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+        border: 0;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #001f4d 0%, #003366 100%);
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 31, 77, 0.25);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .play-btn:active {
+        transform: scale(0.96);
+      }
+
+      .word-text {
+        font-size: 1rem;
+        line-height: 1.45;
+        color: #000000;
+        word-break: keep-all;
+        flex: 1 1 auto;
+      }
+
+      .word-img {
+        width: 56px;
+        height: 56px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-left: 8px;
+        background: #f3f4f6;
+        flex: 0 0 56px;
+      }
+
+      .count {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1>韓国語 はじめよう</h1>
+        <p>韓国語の単語を聞いてみよう</p>
+      </header>
+      <section id="letterGroups" class="letter-groups" aria-label="한국어 문자 연습"></section>
+      <section id="wordList" class="word-list" aria-label="한국어 단어 목록"></section>
+      <div class="count" id="countLabel"></div>
+    </main>
+
+    <script>
+      const words = [
+        "사과", "강아지", "학교", "집", "친구", "책", "노트", "물", "햇빛", "바다",
+        "하늘", "우산", "별", "꽃", "나무", "선생님", "학생", "맛있다", "행복", "사랑",
+        "여행", "음악", "운동", "음식", "공부", "일기", "달력", "방", "침대", "의자",
+        "창문", "문", "전화", "컴퓨터", "스마트폰", "카메라", "사진", "여행지", "서울", "부산",
+        "제주도", "한국어", "영어", "수업", "질문", "답변", "생각", "느낌", "기분", "오늘",
+        "내일", "어제", "지금", "언제", "어디", "무엇", "왜", "어떻게", "아주", "정말",
+        "많이", "조금", "너무", "빠르다", "느리다", "크다", "작다", "높다", "낮다", "뜨겁다",
+        "차갑다", "맑다", "흐리다", "쉬다", "먹다", "마시다", "보다", "듣다", "말하다", "쓰다",
+        "읽다", "가다", "오다", "자다", "일어나다", "웃다", "울다", "돕다", "찾다", "주다",
+        "비행기", "우체국", "시장", "병원", "가게", "바나나", "포도", "딸기", "토마토", "감사하다"
+      ];
+
+      const letterGroups = [
+        { title: "1. 기본 모음", chars: ["아", "야", "어", "여", "오", "요", "우", "유", "으", "이"] },
+        { title: "2. 기본 자음", chars: ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차", "카", "타", "파", "하", "까", "따", "빠", "싸", "짜"] },
+        { title: "3. 복합 모음", chars: ["애", "에", "얘", "예", "와", "워", "위", "의", "외", "왜", "웨"] }
+      ];
+
+      const list = document.getElementById("wordList");
+      const letterGroupsRoot = document.getElementById("letterGroups");
+      const countLabel = document.getElementById("countLabel");
+
+      function createPlayRow(text) {
+        const row = document.createElement("div");
+        row.className = "word-row";
+        const button = document.createElement("button");
+        button.className = "play-btn";
+        button.type = "button";
+        button.textContent = "▶";
+        button.setAttribute("aria-label", `${text} 듣기`);
+        button.addEventListener("click", () => playText(text));
+
+        const textNode = document.createElement("span");
+        textNode.className = "word-text";
+        textNode.textContent = text;
+
+        const img = document.createElement("img");
+        img.className = "word-img";
+        img.alt = `${text} 이미지`;
+        img.width = 56;
+        img.height = 56;
+
+        const imagePath = `images/${encodeURIComponent(text)}.png`;
+        const placeholder = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect width="100%" height="100%" fill="#eef2ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#6b7280">이미지 없음</text></svg>`
+        );
+
+        img.src = imagePath;
+        img.onerror = () => { img.src = placeholder; };
+
+        row.appendChild(button);
+        row.appendChild(textNode);
+        row.appendChild(img);
+        return row;
+      }
+
+      function renderLetterGroups() {
+        letterGroups.forEach((group) => {
+          const section = document.createElement("section");
+          section.className = "letter-section";
+
+          const heading = document.createElement("h2");
+          heading.textContent = group.title;
+
+          const listEl = document.createElement("div");
+          listEl.className = "letter-list";
+
+          group.chars.forEach((char) => listEl.appendChild(createPlayRow(char)));
+
+          section.appendChild(heading);
+          section.appendChild(listEl);
+          letterGroupsRoot.appendChild(section);
+        });
+      }
+
+      function playText(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("이 브라우저는 음성 재생을 지원하지 않습니다.");
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ko-KR";
+        utterance.rate = 0.95;
+        utterance.pitch = 1.05;
+
+        const voices = window.speechSynthesis.getVoices();
+        const koreanVoice = voices.find((voice) => /ko|kr/i.test(voice.lang)) || voices[0];
+        if (koreanVoice) {
+          utterance.voice = koreanVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      renderLetterGroups();
+      words.forEach((word) => list.appendChild(createPlayRow(word)));
+      countLabel.textContent = `${words.length}개의 단어를 표시합니다.`;
+    </script>
+    <footer style="text-align:center;margin-top:40px;padding:20px;color:#666;border-top:1px solid #ddd;font-size:14px;">
+      <p style="margin:0;">&copy; Copyright &copy; SSglobal Miura Yuri</p>
+    </footer>
+  </body>
+</html>
