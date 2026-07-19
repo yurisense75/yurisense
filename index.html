@@ -28,8 +28,8 @@
 		<header>
 			<div class="logo" aria-hidden="true">😊</div>
 			<div>
-				<h1>ハングル基礎 - グループ再生</h1>
-				<p class="note">各行の再生ボタンを押すと、その行の文字を1つの文として再生します。</p>
+				<h1>韓国語 はじめよう</h1>
+				<p class="note">基本の文字を聞いてみよう</p>
 			</div>
 		</header>
 
@@ -99,11 +99,33 @@
 				console.warn('SpeechSynthesis 未対応のブラウザです');
 				return;
 			}
-			const utter = new SpeechSynthesisUtterance(text);
-			utter.lang = 'ko-KR';
-			const v = getKoreanVoice(); if(v) utter.voice = v;
+			
+			// スペース区切りで分割
+			const chars = text.split(' ').filter(c => c.trim());
+			
 			window.speechSynthesis.cancel();
-			window.speechSynthesis.speak(utter);
+			
+			// 複数の文字がある場合は順番に再生
+			if(chars.length > 1){
+				chars.forEach((char, index) => {
+					setTimeout(() => {
+						const utter = new SpeechSynthesisUtterance(char);
+						utter.lang = 'ko-KR';
+						utter.rate = 0.7; // ゆっくり
+						utter.pitch = 1.0;
+						const v = getKoreanVoice();
+						if(v) utter.voice = v;
+						window.speechSynthesis.speak(utter);
+					}, index * 800); // 各文字の間に0.8秒の間隔
+				});
+			} else {
+				// 単一の文字の場合
+				const utter = new SpeechSynthesisUtterance(text);
+				utter.lang = 'ko-KR';
+				utter.rate = 0.7;
+				const v = getKoreanVoice(); if(v) utter.voice = v;
+				window.speechSynthesis.speak(utter);
+			}
 		}
 
 		document.querySelectorAll('.play-btn').forEach(btn=>{
