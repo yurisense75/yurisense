@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -11,202 +11,147 @@
         --navy: #000080;
         --navy-contrast: #ffffff;
         color-scheme: light;
-        font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html, body {
+        height: 100%;
+      }
+
       body {
         margin: 0;
         background: var(--bg);
         color: var(--text);
-        display: flex;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 16px 0;
       }
 
-      .app {
-        width: min(100%, 600px);
-        padding: 0 12px;
-      }
-
-      .header {
-        background: #ffffff;
-        border-radius: 12px;
+      .wrap {
+        max-width: 960px;
+        margin: 40px auto;
         padding: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        margin-bottom: 24px;
-        display: flex;
-        gap: 16px;
-        align-items: flex-start;
       }
 
-      .header-avatar {
-        flex: 0 0 80px;
-        width: 80px;
-        height: 80px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .header-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: start;
       }
 
       .header-content {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .header h1 {
-        font-size: 1.3rem;
-        margin: 0 0 8px;
-        color: #000000;
-        font-weight: 700;
-      }
-
-      .header p {
-        margin: 0 0 6px;
-        font-size: 0.9rem;
-        color: #666666;
-        line-height: 1.4;
-      }
-
-      .header-hint {
-        font-size: 0.85rem;
-        color: #999999;
-        line-height: 1.4;
-        margin: 0;
-      }
-
-      .sections {
         display: flex;
-        flex-direction: column;
         gap: 20px;
+        align-items: center;
+      }
+
+      .character-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
       }
 
       .section {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-
-      .section h2 {
-        font-size: 1.05rem;
-        margin: 0 0 16px;
-        color: #333333;
-        font-weight: 700;
-        border-bottom: 2px solid #ffa500;
-        padding-bottom: 8px;
-      }
-
-      .section-content {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .play-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px 12px;
-        background: #fafafa;
+        margin-top: 20px;
+        padding: 12px;
         border-radius: 8px;
-        transition: background 0.2s ease;
       }
 
-      .play-item:hover {
-        background: #f0f0f0;
+      .group-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0;
       }
 
       .play-btn {
-        flex: 0 0 32px;
-        width: 32px;
-        height: 32px;
-        border: 0;
-        border-radius: 50%;
         background: var(--navy);
         color: var(--navy-contrast);
-        font-size: 0.85rem;
-        font-weight: 700;
+        border: 0;
+        padding: 8px 12px;
+        border-radius: 8px;
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        -webkit-tap-highlight-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-weight: 700;
       }
 
       .play-btn:active {
-        transform: scale(0.95);
+        transform: scale(.98);
       }
 
       .emoji {
-        flex: 0 0 24px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-size: 24px;
+        margin: 0 4px;
       }
 
-      .play-text {
-        flex: 1;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: #333333;
-        word-break: keep-all;
-        white-space: pre-wrap;
+      .group-text {
+        font-size: 22px;
       }
 
-      .count {
-        margin-top: 24px;
-        text-align: center;
-        font-size: 0.85rem;
-        color: #999999;
-        padding: 16px 0;
+      .label {
+        font-weight: 700;
+        margin-right: 8px;
+      }
+
+      .note {
+        color: #333;
+        margin-top: 8px;
+      }
+
+      header img {
+        display: block;
+      }
+
+      img {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .group-text {
+          font-size: 18px;
+        }
       }
 
       footer {
         text-align: center;
         margin-top: 40px;
         padding: 20px;
-        color: #999999;
-        font-size: 0.8rem;
+        color: #666;
+        border-top: 1px solid #ddd;
+        font-size: 14px;
+      }
+
+      footer p {
+        margin: 0;
       }
     </style>
   </head>
   <body>
-    <main class="app">
-      <header class="header">
-        <div class="header-avatar">
-          <img src="images/images_yurisense.jpg" alt="キャラクター">
-        </div>
+    <div class="wrap">
+      <header>
         <div class="header-content">
-          <h1>韓国語 はじめよう</h1>
-          <p>単語を聞いて、言ってみよう</p>
-          <p class="header-hint">バージョンわかればラスラ堂せよ</p>
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>韓国語 はじめよう</h1>
+            <p class="note">単語を聞いて、言ってみよう</p>
+          </div>
         </div>
+        <img src="images/images_yurisense.jpg" alt="キャラクター" class="character-img">
       </header>
 
-      <div id="sectionsContainer" class="sections"></div>
+      <div id="sectionsContainer"></div>
 
-      <div class="count" id="countLabel"></div>
-    </main>
-
-    <footer>
-      <p>&copy; SSglobal Miura Yuri</p>
-    </footer>
+      <footer>
+        <p>&copy; SSglobal Miura Yuri</p>
+      </footer>
+    </div>
 
     <script>
       const words = [
@@ -267,32 +212,6 @@
         }
       ];
 
-      function createPlayItem(text, emoji) {
-        const item = document.createElement("div");
-        item.className = "play-item";
-
-        const btn = document.createElement("button");
-        btn.className = "play-btn";
-        btn.type = "button";
-        btn.textContent = "▶";
-        btn.setAttribute("aria-label", `${text} 듣기`);
-        btn.addEventListener("click", () => playText(text));
-
-        const emojiEl = document.createElement("div");
-        emojiEl.className = "emoji";
-        emojiEl.textContent = emoji;
-
-        const textEl = document.createElement("div");
-        textEl.className = "play-text";
-        textEl.textContent = text;
-
-        item.appendChild(btn);
-        item.appendChild(emojiEl);
-        item.appendChild(textEl);
-
-        return item;
-      }
-
       function renderSections() {
         const container = document.getElementById("sectionsContainer");
 
@@ -302,16 +221,33 @@
 
           const titleEl = document.createElement("h2");
           titleEl.textContent = section.title;
-
-          const contentEl = document.createElement("div");
-          contentEl.className = "section-content";
+          sectionEl.appendChild(titleEl);
 
           section.items.forEach((item) => {
-            contentEl.appendChild(createPlayItem(item, section.emoji));
+            const groupRow = document.createElement("div");
+            groupRow.className = "group-row";
+
+            const btn = document.createElement("button");
+            btn.className = "play-btn";
+            btn.type = "button";
+            btn.textContent = "▶";
+            btn.setAttribute("aria-label", `${item} 듣기`);
+            btn.addEventListener("click", () => playText(item));
+
+            const emojiEl = document.createElement("div");
+            emojiEl.className = "emoji";
+            emojiEl.textContent = section.emoji;
+
+            const textEl = document.createElement("div");
+            textEl.className = "group-text";
+            textEl.textContent = item;
+
+            groupRow.appendChild(btn);
+            groupRow.appendChild(emojiEl);
+            groupRow.appendChild(textEl);
+            sectionEl.appendChild(groupRow);
           });
 
-          sectionEl.appendChild(titleEl);
-          sectionEl.appendChild(contentEl);
           container.appendChild(sectionEl);
         });
       }
@@ -327,27 +263,26 @@
 
       function playText(text) {
         if (!("speechSynthesis" in window)) {
-          alert("이 브라우저는 음성 재생을 지원하지 않습니다.");
+          console.warn('SpeechSynthesis 未対応のブラウザです');
           return;
         }
-
-        const koreanVoice = getKoreanVoice();
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = "ko-KR";
         utterance.rate = 0.7;
         utterance.pitch = 1.0;
-        if (koreanVoice) {
-          utterance.voice = koreanVoice;
-        }
+        const v = getKoreanVoice();
+        if(v) utterance.voice = v;
 
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utterance);
       }
 
       renderSections();
-      const countLabel = document.getElementById("countLabel");
-      countLabel.textContent = `${words.length}つの単語を表示します`;
+
+      if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = function(){ /* no-op */ };
+      }
     </script>
   </body>
 </html>
