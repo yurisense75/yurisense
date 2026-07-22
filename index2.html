@@ -26,12 +26,16 @@
         margin: 0;
         background: var(--bg);
         color: var(--text);
+        display: flex;
+        flex-direction: column;
       }
 
       .wrap {
         max-width: 960px;
         margin: 40px auto;
         padding: 20px;
+        flex: 1;
+        width: 100%;
       }
 
       header {
@@ -121,10 +125,8 @@
 
       footer {
         text-align: center;
-        margin-top: 40px;
         padding: 20px;
         color: #666;
-        border-top: 1px solid #ddd;
         font-size: 14px;
       }
 
@@ -147,11 +149,11 @@
       </header>
 
       <div id="sectionsContainer"></div>
-
-      <footer>
-        <p>&copy; SSglobal Miura Yuri</p>
-      </footer>
     </div>
+
+    <footer>
+      <p>&copy; SSglobal Miura Yuri</p>
+    </footer>
 
     <script>
       const words = [
