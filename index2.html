@@ -16,141 +16,186 @@
 
       body {
         margin: 0;
-        background: linear-gradient(135deg, #ffd69e 0%, #ffc488 100%);
+        background: #f5f5f5;
         color: #000000;
         display: flex;
         justify-content: center;
         min-height: 100vh;
+        padding: 16px 0;
       }
 
       .app {
-        width: min(100%, 430px);
-        padding: 16px 12px 28px;
+        width: min(100%, 600px);
+        padding: 0 12px;
       }
 
       .header {
         background: #ffffff;
-        border-radius: 18px;
-        padding: 14px 14px 12px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-        margin-bottom: 12px;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 24px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .header-avatar {
+        flex: 0 0 80px;
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
+      }
+
+      .header-content {
+        flex: 1;
+        min-width: 0;
       }
 
       .header h1 {
-        font-size: 1.1rem;
-        margin: 0 0 6px;
+        font-size: 1.3rem;
+        margin: 0 0 8px;
         color: #000000;
+        font-weight: 700;
       }
 
       .header p {
-        margin: 0;
+        margin: 0 0 6px;
         font-size: 0.9rem;
-        color: #000000;
-        line-height: 1.5;
+        color: #666666;
+        line-height: 1.4;
       }
 
-      .letter-groups {
+      .header-hint {
+        font-size: 0.85rem;
+        color: #999999;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .section {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .section h2 {
+        font-size: 1.05rem;
+        margin: 0 0 16px;
+        color: #333333;
+        font-weight: 700;
+        border-bottom: 2px solid #ffa500;
+        padding-bottom: 8px;
+      }
+
+      .section-content {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        margin-bottom: 12px;
       }
 
-      .letter-section {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 12px 12px 10px;
-        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
-      }
-
-      .letter-section h2 {
-        font-size: 0.95rem;
-        margin: 0 0 8px;
-        color: #1d4ed8;
-      }
-
-      .letter-list {
+      .play-item {
         display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .word-list {
-        display: grid;
-        gap: 8px;
-      }
-
-      .word-row {
-        display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px;
-        background: #ffffff;
-        border-radius: 14px;
-        padding: 10px 11px;
-        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+        padding: 10px 12px;
+        background: #fafafa;
+        border-radius: 8px;
+        transition: background 0.2s ease;
       }
 
-      .emoji {
-        font-size: 24px;
-        margin: 0 4px;
-        flex: 0 0 auto;
+      .play-item:hover {
+        background: #f0f0f0;
       }
 
       .play-btn {
-        flex: 0 0 42px;
-        width: 42px;
-        height: 42px;
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
         border: 0;
         border-radius: 50%;
         background: linear-gradient(135deg, #001f4d 0%, #003366 100%);
         color: #ffffff;
-        font-size: 1rem;
+        font-size: 0.85rem;
         font-weight: 700;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 31, 77, 0.25);
+        box-shadow: 0 2px 6px rgba(0, 31, 77, 0.2);
         -webkit-tap-highlight-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .play-btn:active {
-        transform: scale(0.96);
+        transform: scale(0.95);
       }
 
-      .word-text {
-        font-size: 1rem;
-        line-height: 1.45;
-        color: #000000;
+      .emoji {
+        flex: 0 0 24px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .play-text {
+        flex: 1;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #333333;
         word-break: keep-all;
-        flex: 1 1 auto;
-      }
-
-      .word-img {
-        width: 56px;
-        height: 56px;
-        border-radius: 10px;
-        object-fit: cover;
-        margin-left: 8px;
-        background: #f3f4f6;
-        flex: 0 0 56px;
+        white-space: pre-wrap;
       }
 
       .count {
-        margin-top: 10px;
+        margin-top: 24px;
         text-align: center;
         font-size: 0.85rem;
-        color: #000000;
+        color: #999999;
+        padding: 16px 0;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        color: #999999;
+        font-size: 0.8rem;
       }
     </style>
   </head>
   <body>
     <main class="app">
       <header class="header">
-        <h1>韓国語 はじめよう</h1>
-        <p>韓国語の単語を聞いてみよう</p>
+        <div class="header-avatar">👧</div>
+        <div class="header-content">
+          <h1>韓国語 はじめよう</h1>
+          <p>単語を聞いて、言ってみよう</p>
+          <p class="header-hint">バージョンわかればラスラ堂せよ</p>
+        </div>
       </header>
-      <section id="letterGroups" class="letter-groups" aria-label="한국어 문자 연습"></section>
-      <section id="wordList" class="word-list" aria-label="한국어 단어 목록"></section>
+
+      <div id="sectionsContainer" class="sections"></div>
+
       <div class="count" id="countLabel"></div>
     </main>
+
+    <footer>
+      <p>&copy; SSglobal Miura Yuri</p>
+    </footer>
 
     <script>
       const words = [
@@ -166,71 +211,97 @@
         "비행기", "우체국", "시장", "병원", "가게", "바나나", "포도", "딸기", "토마토", "감사하다"
       ];
 
-      const letterGroups = [
-        { title: "1. 기본 모음", chars: ["아", "야", "어", "여", "오", "요", "우", "유", "으", "이"] },
-        { title: "2. 기본 자음", chars: ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차", "카", "타", "파", "하", "까", "따", "빠", "싸", "짜"] },
-        { title: "3. 복합 모음", chars: ["애", "에", "얘", "예", "와", "워", "위", "의", "외", "왜", "웨"] }
+      const sections = [
+        {
+          title: "1 名詞 見ないで言えるかな？",
+          emoji: "🍎",
+          items: [
+            "손은 손입니다. 손으로요.",
+            "손구 손으로며 손여 아니에이요.",
+            "손은거이요. 손구 아이게이요."
+          ]
+        },
+        {
+          title: "2 形容詞 見いて言えるかな？",
+          emoji: "🎨",
+          items: [
+            "맛이 맛습니다. 맛있어요.",
+            "맛치 없습니다. 맛지 없어요.",
+            "맛행주? 감삼입니다.",
+            "자지 없습니다. 자지 없어요.",
+            "맛지 없습니다. 맛지 없어요.",
+            "바뻐요. 바쁘십니다. 바빠요.",
+            "바쁜습니다. 바쁜어요."
+          ]
+        },
+        {
+          title: "3 動詞 見ないで言えるかな？",
+          emoji: "🎬",
+          items: [
+            "가다. 같습니다. 가요.",
+            "가지 없습니다. 가지 없어요.",
+            "왔습니다. 왔어요.",
+            "가세요. 가지 마세요."
+          ]
+        },
+        {
+          title: "4 動詞 —気に言ってみよう",
+          emoji: "🗣️",
+          items: [
+            "갈 수 있어요. 갈 수 있어요. 못 가요.",
+            "가거, 가겨, 가겨, 가겨마.",
+            "가겨이요. 같 기예요.",
+            "가는 사람, 간 사람, 갈 사람."
+          ]
+        }
       ];
 
-      const list = document.getElementById("wordList");
-      const letterGroupsRoot = document.getElementById("letterGroups");
-      const countLabel = document.getElementById("countLabel");
+      function createPlayItem(text, emoji) {
+        const item = document.createElement("div");
+        item.className = "play-item";
 
-      function createPlayRow(text) {
-        const row = document.createElement("div");
-        row.className = "word-row";
-        const button = document.createElement("button");
-        button.className = "play-btn";
-        button.type = "button";
-        button.textContent = "▶";
-        button.setAttribute("aria-label", `${text} 듣기`);
-        button.addEventListener("click", () => playText(text));
+        const btn = document.createElement("button");
+        btn.className = "play-btn";
+        btn.type = "button";
+        btn.textContent = "▶";
+        btn.setAttribute("aria-label", `${text} 듣기`);
+        btn.addEventListener("click", () => playText(text));
 
-        const textNode = document.createElement("span");
-        textNode.className = "word-text";
-        textNode.textContent = text;
+        const emojiEl = document.createElement("div");
+        emojiEl.className = "emoji";
+        emojiEl.textContent = emoji;
 
-        const img = document.createElement("img");
-        img.className = "word-img";
-        img.alt = `${text} 이미지`;
-        img.width = 56;
-        img.height = 56;
+        const textEl = document.createElement("div");
+        textEl.className = "play-text";
+        textEl.textContent = text;
 
-        const imagePath = `images/${encodeURIComponent(text)}.png`;
-        const placeholder = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-          `<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect width="100%" height="100%" fill="#eef2ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#6b7280">이미지 없음</text></svg>`
-        );
+        item.appendChild(btn);
+        item.appendChild(emojiEl);
+        item.appendChild(textEl);
 
-        img.src = imagePath;
-        img.onerror = () => { img.src = placeholder; };
-
-        const emoji = document.createElement("div");
-        emoji.className = "emoji";
-        emoji.textContent = "�";
-
-        row.appendChild(button);
-        row.appendChild(emoji);
-        row.appendChild(textNode);
-        row.appendChild(img);
-        return row;
+        return item;
       }
 
-      function renderLetterGroups() {
-        letterGroups.forEach((group) => {
-          const section = document.createElement("section");
-          section.className = "letter-section";
+      function renderSections() {
+        const container = document.getElementById("sectionsContainer");
 
-          const heading = document.createElement("h2");
-          heading.textContent = group.title;
+        sections.forEach((section) => {
+          const sectionEl = document.createElement("div");
+          sectionEl.className = "section";
 
-          const listEl = document.createElement("div");
-          listEl.className = "letter-list";
+          const titleEl = document.createElement("h2");
+          titleEl.textContent = section.title;
 
-          group.chars.forEach((char) => listEl.appendChild(createPlayRow(char)));
+          const contentEl = document.createElement("div");
+          contentEl.className = "section-content";
 
-          section.appendChild(heading);
-          section.appendChild(listEl);
-          letterGroupsRoot.appendChild(section);
+          section.items.forEach((item) => {
+            contentEl.appendChild(createPlayItem(item, section.emoji));
+          });
+
+          sectionEl.appendChild(titleEl);
+          sectionEl.appendChild(contentEl);
+          container.appendChild(sectionEl);
         });
       }
 
@@ -242,45 +313,22 @@
 
         const voices = window.speechSynthesis.getVoices();
         const koreanVoice = voices.find((voice) => /ko|kr/i.test(voice.lang)) || voices[0];
-        
-        // スペース区切りで分割
-        const chars = text.split(' ').filter(c => c.trim());
-        
-        window.speechSynthesis.cancel();
-        
-        // 複数の文字がある場合は順番に再生
-        if(chars.length > 1){
-          chars.forEach((char, index) => {
-            setTimeout(() => {
-              const utterance = new SpeechSynthesisUtterance(char);
-              utterance.lang = "ko-KR";
-              utterance.rate = 0.7; // ゆっくり
-              utterance.pitch = 1.0;
-              if (koreanVoice) {
-                utterance.voice = koreanVoice;
-              }
-              window.speechSynthesis.speak(utterance);
-            }, index * 800); // 各文字の間に0.8秒の間隔
-          });
-        } else {
-          // 単一の文字の場合
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "ko-KR";
-          utterance.rate = 0.7;
-          utterance.pitch = 1.05;
-          if (koreanVoice) {
-            utterance.voice = koreanVoice;
-          }
-          window.speechSynthesis.speak(utterance);
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ko-KR";
+        utterance.rate = 0.7;
+        utterance.pitch = 1.0;
+        if (koreanVoice) {
+          utterance.voice = koreanVoice;
         }
+
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
       }
 
-      renderLetterGroups();
-      words.forEach((word) => list.appendChild(createPlayRow(word)));
+      renderSections();
+      const countLabel = document.getElementById("countLabel");
       countLabel.textContent = `${words.length}つの単語を表示します`;
     </script>
-    <footer style="text-align:center;margin-top:40px;padding:20px;color:#666;border-top:1px solid #ddd;font-size:14px;">
-      <p style="margin:0;">&copy; SSglobal Miura Yuri</p>
-    </footer>
   </body>
 </html>
