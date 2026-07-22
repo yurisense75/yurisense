@@ -6,6 +6,10 @@
     <title>韓国語 はじめよう</title>
     <style>
       :root {
+        --bg: #FEF1E0;
+        --text: #000000;
+        --navy: #000080;
+        --navy-contrast: #ffffff;
         color-scheme: light;
         font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
       }
@@ -16,8 +20,8 @@
 
       body {
         margin: 0;
-        background: #f5f5f5;
-        color: #000000;
+        background: var(--bg);
+        color: var(--text);
         display: flex;
         justify-content: center;
         min-height: 100vh;
@@ -44,13 +48,18 @@
         flex: 0 0 80px;
         width: 80px;
         height: 80px;
-        background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
-        border-radius: 12px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 40px;
-        box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
       }
 
       .header-content {
@@ -127,12 +136,12 @@
         height: 32px;
         border: 0;
         border-radius: 50%;
-        background: linear-gradient(135deg, #001f4d 0%, #003366 100%);
-        color: #ffffff;
+        background: var(--navy);
+        color: var(--navy-contrast);
         font-size: 0.85rem;
         font-weight: 700;
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0, 31, 77, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         -webkit-tap-highlight-color: transparent;
         display: flex;
         align-items: center;
@@ -180,7 +189,9 @@
   <body>
     <main class="app">
       <header class="header">
-        <div class="header-avatar">👧</div>
+        <div class="header-avatar">
+          <img src="images/images_yurisense.jpg" alt="キャラクター">
+        </div>
         <div class="header-content">
           <h1>韓国語 はじめよう</h1>
           <p>単語を聞いて、言ってみよう</p>
@@ -305,14 +316,22 @@
         });
       }
 
+      function getKoreanVoice(){
+        const voices = speechSynthesis.getVoices();
+        for(const v of voices){
+          if(v.lang && v.lang.toLowerCase().startsWith('ko')) return v;
+          if(v.name && /korean/i.test(v.name)) return v;
+        }
+        return null;
+      }
+
       function playText(text) {
         if (!("speechSynthesis" in window)) {
           alert("이 브라우저는 음성 재생을 지원하지 않습니다.");
           return;
         }
 
-        const voices = window.speechSynthesis.getVoices();
-        const koreanVoice = voices.find((voice) => /ko|kr/i.test(voice.lang)) || voices[0];
+        const koreanVoice = getKoreanVoice();
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = "ko-KR";
