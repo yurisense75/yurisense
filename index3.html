@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME1GY66DMK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+
+      gtag('config', 'G-ME1GY66DMK');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>韓国語 パターン練習</title>
+    <style>
+      :root {
+        --bg: #FEF1E0;
+        --text: #000000;
+        --navy: #000080;
+        --navy-contrast: #ffffff;
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wrap {
+        max-width: 960px;
+        margin: 40px auto;
+        padding: 20px;
+        flex: 1;
+        width: 100%;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .header-content {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .character-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .section {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      .group-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0;
+      }
+
+      .play-btn {
+        background: var(--navy);
+        color: var(--navy-contrast);
+        border: 0;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .play-btn:active {
+        transform: scale(.98);
+      }
+
+      .emoji {
+        font-size: 24px;
+        margin: 0 4px;
+      }
+
+      .group-text {
+        font-size: 22px;
+      }
+
+      .label {
+        font-weight: 700;
+        margin-right: 8px;
+      }
+
+      .note {
+        color: #333;
+        margin-top: 8px;
+      }
+
+      header img {
+        display: block;
+      }
+
+      img {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .group-text {
+          font-size: 18px;
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 14px;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* navigation buttons at the bottom */
+      .nav-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .nav-link {
+        text-decoration: none;
+      }
+
+      .nav-btn {
+        background: var(--navy);
+        color: var(--navy-contrast);
+        border: 0;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 700;
+        display: inline-block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="header-content">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>韓国語 パターン練習</h1>
+            <p class="note">単語を聞いて、言ってみよう</p>
+            <p class="note">パターンがわかればスラスラ話せるよ</p>
+          </div>
+        </div>
+        <img src="images/images_yurisense.jpg" alt="キャラクター" class="character-img">
+      </header>
+
+      <div id="sectionsContainer"></div>
+
+      <!-- ページ最後のナビゲーションボタン -->
+      <div class="nav-buttons" aria-label="ページナビゲーション">
+        <a href="index.html" class="nav-link" aria-label="indexへ移動"><div class="nav-btn">index.html</div></a>
+        <a href="index2.html" class="nav-link" aria-label="index2へ移動"><div class="nav-btn">index2.html</div></a>
+        <a href="index3.html" class="nav-link" aria-label="index3へ移動"><div class="nav-btn">index3.html</div></a>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; SSglobal Miura Yuri</p>
+    </footer>
+
+    <script>
+      const words = [
+        "사과", "강아지", "학교", "집", "친구", "책", "노트", "물", "햇빛", "바다",
+        "하늘", "우산", "별", "꽃", "나무", "선생님", "학생", "맛있다", "행복", "사랑",
+        "여행", "음악", "운동", "음식", "공부", "일기", "달력", "방", "침대", "의자",
+        "창문", "문", "전화", "컴퓨터", "스마트폰", "카메라", "사진", "여행지", "서울", "부산",
+        "제주도", "한국어", "영어", "수업", "질문", "답변", "생각", "느낌", "기분", "오늘",
+        "내일", "어제", "지금", "언제", "어디", "무엇", "왜", "어떻게", "아주", "정말",
+        "많이", "조금", "너무", "빠르다", "느리다", "크다", "작다", "높다", "낮다", "뜨겁다",
+        "차갑다", "맑다", "흐리다", "쉬다", "먹다", "마시다", "보다", "듣다", "말하다", "쓰다",
+        "읽다", "가다", "오다", "자다", "일어나다", "웃다", "울다", "돕다", "찾다", "주다",
+        "비행기", "우체국", "시장", "병원", "가게", "바나나", "포도", "딸기", "토마토", "감사하다"
+      ];
+
+      const sections = [
+        {
+          title: "1 名詞 見ないで言えるかな？",
+          emoji: "🍊",
+          items: [
+            "주스. 주스입니다. 주스예요.",
+            "주스가 아닙니다. 주스가 아니에요.",
+            "주스였어요. 주스가 아니었어요.",
+
+            "학생. 학생입니다. 학생이에요.",
+            "학생이 아닙니다. 학생이 아니에요.",
+            "학생이었어요. 학생이 아니었어요.", 
+          ]
+        },
+        {
+          title: "2 形容詞 見ないで言えるかな？",
+          emoji: "🍑",
+          items: [
+            "많다. 많습니다. 많아요.",
+            "많지 않습니다. 많지 않아요.",
+            "많았습니다. 많았어요.",
+            
+            "맵다. 맵습니다. 매워요.",
+            "맵지 않습니다. 맵지 않아요.",
+            "매웠습니다. 매웠어요.",
+            
+            "바쁘다. 바쁩니다. 바빠요.",
+            "바쁘지 않습니다. 바쁘지 않아요.",
+            "바빴습니다. 바빴어요.",
+          ]
+        },
+        {
+          title: "3 動詞 見ないで言えるかな？",
+          emoji: "🍎",
+          items: [
+            "가다. 갑니다. 가요.",
+            "먹다. 먹습니다. 먹어요.",
+            "살다. 삽니다. 살아요.",
+            "식사하다. 식사합니다. 식사해요.",
+            
+            "가지 않습니다. 가지 않아요.",
+            "먹지 않습니다. 먹지 않아요.",
+            "살지 않습니다. 살지 않아요.",
+            "식사하지 않습니다. 식사하지 않아요.",
+            
+            "갔습니다. 갔어요.",
+            "먹습니다. 먹었어아요.",
+            "살았습니다. 살았어요.",
+            "식사했습니다. 식사했어요.",
+           
+          ]
+        },
+        {
+          title: "4 動詞 —気に言ってみよう",
+          emoji: "🍏",
+          items: [
+            "가다. 갑니다. 가요.",
+            "가지 않습니다. 가지 않아요.",
+            "갔습니다. 갔어요.",
+            "가세요. 가지 마세요.",
+            "갈까요. 갑시다.",
+            "갈 수 있어요. 갈 수 없어요. 못 가요.",
+            "가고, 가면, 가서, 가니까,",
+            "가겠어요. 갈 거예요.",
+            "가는 사람. 간 사람. 갈 사람.",
+          ]
+        }
+      ];
+
+      function renderSections() {
+        const container = document.getElementById("sectionsContainer");
+
+        sections.forEach((section) => {
+          const sectionEl = document.createElement("div");
+          sectionEl.className = "section";
+
+          const titleEl = document.createElement("h2");
+          titleEl.textContent = section.title;
+          sectionEl.appendChild(titleEl);
+
+          section.items.forEach((item) => {
+            const groupRow = document.createElement("div");
+            groupRow.className = "group-row";
+
+            const btn = document.createElement("button");
+            btn.className = "play-btn";
+            btn.type = "button";
+            btn.textContent = "▶";
+            btn.setAttribute("aria-label", `${item} 듣기`);
+            btn.addEventListener("click", () => playText(item));
+
+            const emojiEl = document.createElement("div");
+            emojiEl.className = "emoji";
+            emojiEl.textContent = section.emoji;
+
+            const textEl = document.createElement("div");
+            textEl.className = "group-text";
+            textEl.textContent = item;
+
+            groupRow.appendChild(btn);
+            groupRow.appendChild(emojiEl);
+            groupRow.appendChild(textEl);
+            sectionEl.appendChild(groupRow);
+          });
+
+          container.appendChild(sectionEl);
+        });
+      }
+
+      function getKoreanVoice(){
+        const voices = speechSynthesis.getVoices();
+        for(const v of voices){
+          if(v.lang && v.lang.toLowerCase().startsWith('ko')) return v;
+          if(v.name && /korean/i.test(v.name)) return v;
+        }
+        return null;
+      }
+
+      function playText(text) {
+        if (!("speechSynthesis" in window)) {
+          console.warn('SpeechSynthesis 未対応のブラウザです');
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ko-KR";
+        utterance.rate = 0.7;
+        utterance.pitch = 1.0;
+        const v = getKoreanVoice();
+        if(v) utterance.voice = v;
+
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      }
+
+      renderSections();
+
+      if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = function(){ /* no-op */ };
+      }
+    </script>
+  </body>
+</html>
