@@ -78,6 +78,12 @@
         border-radius: 8px;
       }
 
+      .quiz-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 16px 0 12px 0;
+      }
+
       .group-row {
         display: flex;
         align-items: center;
@@ -179,7 +185,58 @@
         <img src="images/images_yurisense.jpg" alt="" class="character-img">
       </header>
 
-      <div id="sectionsContainer"></div>
+      <div class="section">
+        <div class="quiz-title">Quiz 1     💧＋ 🥩＝？</div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="물고기">▶</button>
+          <div class="emoji">🐟</div>
+          <div class="group-text">물고기</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="물">▶</button>
+          <div class="emoji">💧</div>
+          <div class="group-text">물</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="고기">▶</button>
+          <div class="emoji">🥩</div>
+          <div class="group-text">고기</div>
+        </div>
+
+        <div class="quiz-title">Quiz 2     🔥＋ 🥩＝？</div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="불고기">▶</button>
+          <div class="emoji">🔥🥩</div>
+          <div class="group-text">불고기</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="불">▶</button>
+          <div class="emoji">🔥</div>
+          <div class="group-text">불</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="고기">▶</button>
+          <div class="emoji">🥩</div>
+          <div class="group-text">고기</div>
+        </div>
+
+        <div class="quiz-title">Quiz 3     👊🏻＋ 🍚＝？</div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="주먹밥">▶</button>
+          <div class="emoji">🍙</div>
+          <div class="group-text">주먹밥</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="주먹">▶</button>
+          <div class="emoji">👊🏻</div>
+          <div class="group-text">주먹</div>
+        </div>
+        <div class="group-row">
+          <button class="play-btn" data-phrase="밥">▶</button>
+          <div class="emoji">🍚</div>
+          <div class="group-text">밥</div>
+        </div>
+      </div>
 
       <!-- ページ最後のナビゲーションボタン -->
       <div class="nav-buttons" aria-label="ページナビゲーション">
@@ -195,64 +252,42 @@
     </footer>
 
     <script>
-      const words = [];
-
-      const sections = [
-        {
-          title: "",
-          emoji: "🐟",
-          items: [
-            "물고기",
-            "",
-            "💧",
-            "물",
-            "",
-            "🥩",
-            "고기"
-          ]
+      function getKoreanVoice(){
+        const voices = speechSynthesis.getVoices();
+        for(const v of voices){
+          if(v.lang && v.lang.toLowerCase().startsWith('ko')) return v;
+          if(v.name && /korean/i.test(v.name)) return v;
         }
-      ];
-
-      function renderSections() {
-        const container = document.getElementById("sectionsContainer");
-
-        sections.forEach((section) => {
-          const sectionEl = document.createElement("div");
-          sectionEl.className = "section";
-
-          const titleEl = document.createElement("h2");
-          titleEl.textContent = section.title;
-          sectionEl.appendChild(titleEl);
-
-          section.items.forEach((item) => {
-            const groupRow = document.createElement("div");
-            groupRow.className = "group-row";
-
-            const btn = document.createElement("button");
-            btn.className = "play-btn";
-            btn.type = "button";
-            btn.textContent = "▶";
-            btn.setAttribute("aria-label", "");
-
-            const emojiEl = document.createElement("div");
-            emojiEl.className = "emoji";
-            emojiEl.textContent = section.emoji;
-
-            const textEl = document.createElement("div");
-            textEl.className = "group-text";
-            textEl.textContent = item;
-
-            groupRow.appendChild(btn);
-            groupRow.appendChild(emojiEl);
-            groupRow.appendChild(textEl);
-            sectionEl.appendChild(groupRow);
-          });
-
-          container.appendChild(sectionEl);
-        });
+        return null;
       }
 
-      renderSections();
+      function playText(text) {
+        if (!("speechSynthesis" in window)) {
+          console.warn('SpeechSynthesis 未対応のブラウザです');
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ko-KR";
+        utterance.rate = 0.7;
+        utterance.pitch = 1.0;
+        const v = getKoreanVoice();
+        if(v) utterance.voice = v;
+
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      }
+
+      document.querySelectorAll('.play-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const phrase = btn.getAttribute('data-phrase') || '';
+          playText(phrase);
+        });
+      });
+
+      if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = function(){ /* no-op */ };
+      }
     </script>
   </body>
 </html>
