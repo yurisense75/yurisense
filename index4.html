@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME1GY66DMK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+
+      gtag('config', 'G-ME1GY66DMK');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <style>
+      :root {
+        --bg: #FEF1E0;
+        --text: #000000;
+        --navy: #000080;
+        --navy-contrast: #ffffff;
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wrap {
+        max-width: 960px;
+        margin: 40px auto;
+        padding: 20px;
+        flex: 1;
+        width: 100%;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .header-content {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .character-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .section {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      .group-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0;
+      }
+
+      .play-btn {
+        background: var(--navy);
+        color: var(--navy-contrast);
+        border: 0;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .play-btn:active {
+        transform: scale(.98);
+      }
+
+      .emoji {
+        font-size: 24px;
+        margin: 0 4px;
+      }
+
+      .group-text {
+        font-size: 22px;
+      }
+
+      .label {
+        font-weight: 700;
+        margin-right: 8px;
+      }
+
+      .note {
+        color: #333;
+        margin-top: 8px;
+      }
+
+      header img {
+        display: block;
+      }
+
+      img {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .group-text {
+          font-size: 18px;
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 14px;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* navigation buttons at the bottom */
+      .nav-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .nav-link {
+        text-decoration: none;
+      }
+
+      .nav-btn {
+        background: var(--navy);
+        color: var(--navy-contrast);
+        border: 0;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 700;
+        display: inline-block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="header-content">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1></h1>
+          </div>
+        </div>
+        <img src="images/images_yurisense.jpg" alt="" class="character-img">
+      </header>
+
+      <div id="sectionsContainer"></div>
+
+      <!-- ページ最後のナビゲーションボタン -->
+      <div class="nav-buttons" aria-label="ページナビゲーション">
+        <a href="index.html" class="nav-link" aria-label=""><div class="nav-btn">index.html</div></a>
+        <a href="index2.html" class="nav-link" aria-label=""><div class="nav-btn">index2.html</div></a>
+        <a href="index3.html" class="nav-link" aria-label=""><div class="nav-btn">index3.html</div></a>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; SSglobal Miura Yuri</p>
+    </footer>
+
+    <script>
+      const words = [];
+
+      const sections = [];
+
+      function renderSections() {
+        const container = document.getElementById("sectionsContainer");
+
+        sections.forEach((section) => {
+          const sectionEl = document.createElement("div");
+          sectionEl.className = "section";
+
+          const titleEl = document.createElement("h2");
+          titleEl.textContent = section.title;
+          sectionEl.appendChild(titleEl);
+
+          section.items.forEach((item) => {
+            const groupRow = document.createElement("div");
+            groupRow.className = "group-row";
+
+            const btn = document.createElement("button");
+            btn.className = "play-btn";
+            btn.type = "button";
+            btn.textContent = "▶";
+            btn.setAttribute("aria-label", "");
+
+            const emojiEl = document.createElement("div");
+            emojiEl.className = "emoji";
+            emojiEl.textContent = section.emoji;
+
+            const textEl = document.createElement("div");
+            textEl.className = "group-text";
+            textEl.textContent = item;
+
+            groupRow.appendChild(btn);
+            groupRow.appendChild(emojiEl);
+            groupRow.appendChild(textEl);
+            sectionEl.appendChild(groupRow);
+          });
+
+          container.appendChild(sectionEl);
+        });
+      }
+
+      renderSections();
+    </script>
+  </body>
+</html>
